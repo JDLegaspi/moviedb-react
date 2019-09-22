@@ -12,6 +12,28 @@ class MovieTile extends React.Component<MovieTileProps> {
     constructor(props: MovieTileProps) {
         super(props);
     }
+
+    getRatingQuality(rating: number) {
+        let quality = ["low", "medium", "high"];
+        return quality[Math.trunc(rating / 33)];
+    }
+
+    render() {
+        let ratingPercentage = this.props.rating * 10;
+        let ratingClasses: string[] = ["movie-tile-rating", "rating-" + this.getRatingQuality(ratingPercentage)]
+
+        return (
+            <div className="movie-tile-wrapper">
+                <div className="movie-tile-img" style={{backgroundImage: `url(${this.props.imageUrl})`}}>
+                    <div className={ratingClasses.join(" ")}><span>{ratingPercentage}%</span></div>
+                </div>
+                <div className="movie-tile-info">
+                    <p className="movie-tile-title">{this.props.title}</p>
+                    <p className="movie-tile-release-date">{this.props.releaseDate}</p>
+                </div>
+            </div>
+        );
+    }
 }
 
 export default MovieTile;

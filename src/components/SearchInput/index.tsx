@@ -9,6 +9,12 @@ class SearchInput extends React.Component<SearchInputProps> {
     constructor(props: SearchInputProps) {
         super(props);
     }
+
+    render() {
+        return (
+            <div />
+        );
+    }
 }
 
 export default SearchInput;

@@ -1,0 +1,9 @@
+.movie-list {
+    display: flex;
+    flex-wrap: wrap;
+    // justify-content: space-evenly;
+
+    > .movie-tile-wrapper {
+        padding: 12px 15px;
+    }
+}
