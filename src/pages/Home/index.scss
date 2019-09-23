@@ -6,7 +6,8 @@
             font-family: Montserrat;
             font-weight: bold;
             font-size: 20px;
-            margin: 12px 0;
+            margin-bottom: 12px;
+            margin-top: 0;
 
             padding-left: 15px;
             color: #E3F4FC;
@@ -30,4 +31,8 @@
         &#right-svg { right: 0; }
 
     }
+}
+
+.search-input-outer-wrapper {
+    margin-top: -30px;
 }

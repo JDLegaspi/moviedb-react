@@ -48,14 +48,14 @@ const AppReducer = (state = initialAppState, action: any) => {
                     title: movieResponse.title !== undefined ? movieResponse.title : "",
                     imageUrl: movieResponse.poster_path !== undefined ? "https://image.tmdb.org/t/p/original" + movieResponse.poster_path : "",
                     releaseDate: movieResponse.release_date !== undefined ? movieResponse.release_date : "",
-                    rating: movieResponse.vote_average !== undefined ? movieResponse.vote_average : 0
+                    rating: movieResponse.vote_average !== undefined ? movieResponse.vote_average : undefined
                 })
             }
 
             state = {
                 ...state,
                 homeState: {
-                    loading: true,
+                    loading: false,
                     movies: movies
                 }
             }
@@ -75,7 +75,7 @@ const AppReducer = (state = initialAppState, action: any) => {
 
                 backgroundUrl: movieDetailsResponse.backdrop_path !== undefined ? "https://image.tmdb.org/t/p/original" + movieDetailsResponse.backdrop_path : "",
                 overview: movieDetailsResponse.overview !== undefined ? movieDetailsResponse.overview : "",
-                runtime: movieDetailsResponse.runtime !== undefined ? movieDetailsResponse.runtime : 0,
+                runtime: movieDetailsResponse.runtime !== undefined ? movieDetailsResponse.runtime : undefined,
             }
 
             state = {
@@ -97,14 +97,14 @@ const AppReducer = (state = initialAppState, action: any) => {
                         title: movieResponse.title !== undefined ? movieResponse.title : "",
                         imageUrl: movieResponse.poster_path !== undefined ? "https://image.tmdb.org/t/p/original" + movieResponse.poster_path : "",
                         releaseDate: movieResponse.release_date !== undefined ? movieResponse.release_date : "",
-                        rating: movieResponse.vote_average !== undefined ? movieResponse.vote_average : 0
+                        rating: movieResponse.vote_average !== undefined ? movieResponse.vote_average : undefined
                     })
                 }
 
                 state = {
                     ...state,
                     homeState: {
-                        loading: true,
+                        loading: false,
                         movies: moviesSearch
                     }
                 }

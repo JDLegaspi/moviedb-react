@@ -5,6 +5,7 @@
 .movie-page-header {
     min-height: 245px;
     background-size: cover;
+    background-position: center;
 
     @media screen and (min-width : 1224px) {
         min-height: 400px;

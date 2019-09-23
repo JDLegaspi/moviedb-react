@@ -1,5 +1,6 @@
 import React from 'react';
 import "./index.scss";
+import { monthNames } from '../../constants';
 
 export interface MovieTileProps {
     id: number;
@@ -26,22 +27,33 @@ class MovieTile extends React.Component<MovieTileProps> {
         if (this.props.onMovieClick !== undefined) this.props.onMovieClick(this.props.id);
     }
 
+    convertDateString(dateString: string): string {
+        let date = new Date(dateString);
+
+        console.log(date.getMonth())
+
+        return `${monthNames[date.getMonth()]} ${date.getFullYear()}`;
+    }
+
     render() {
         let ratingPercentage = this.props.rating ? this.props.rating * 10 : undefined;
         let ratingClasses: string[] = ["movie-tile-rating", ratingPercentage ? "rating-" + this.getRatingQuality(ratingPercentage) : ""]
+
+        //use original image or placeholder if not found
+        let movieImg = this.props.imageUrl !== "https://image.tmdb.org/t/p/originalnull" ? this.props.imageUrl : "https://previews.123rf.com/images/dstarky/dstarky1701/dstarky170101360/69424345-movie-icon-or-logo-in-modern-line-style-high-quality-black-outline-pictogram-for-web-site-design-and.jpg"
 
         return (
             <div className="movie-tile-wrapper">
                 <div
                     className="movie-tile-img"
-                    style={{backgroundImage: `url(${this.props.imageUrl})`}}
+                    style={{backgroundImage: `url(${movieImg})`}}
                     onClick={this.handleMovieClick}
                 >
-                    {this.props.rating && <div className={ratingClasses.join(" ")}><span>{ratingPercentage}%</span></div>}
+                    {ratingPercentage && <div className={ratingClasses.join(" ")}><span>{ratingPercentage}%</span></div>}
                 </div>
                 <div className="movie-tile-info">
                     <p className="movie-tile-title">{this.props.title}</p>
-                    <p className="movie-tile-release-date">{this.props.releaseDate}</p>
+                    <p className="movie-tile-release-date">{this.convertDateString(this.props.releaseDate)}</p>
                 </div>
             </div>
         );
