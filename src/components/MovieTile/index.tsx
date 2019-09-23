@@ -4,7 +4,7 @@ import "./index.scss";
 export interface MovieTileProps {
     title: string;
     releaseDate: string;
-    rating: number;
+    rating?: number;
     imageUrl: string;
 }
 
@@ -19,13 +19,13 @@ class MovieTile extends React.Component<MovieTileProps> {
     }
 
     render() {
-        let ratingPercentage = this.props.rating * 10;
-        let ratingClasses: string[] = ["movie-tile-rating", "rating-" + this.getRatingQuality(ratingPercentage)]
+        let ratingPercentage = this.props.rating ? this.props.rating * 10 : undefined;
+        let ratingClasses: string[] = ["movie-tile-rating", ratingPercentage ? "rating-" + this.getRatingQuality(ratingPercentage) : ""]
 
         return (
             <div className="movie-tile-wrapper">
                 <div className="movie-tile-img" style={{backgroundImage: `url(${this.props.imageUrl})`}}>
-                    <div className={ratingClasses.join(" ")}><span>{ratingPercentage}%</span></div>
+                    {this.props.rating && <div className={ratingClasses.join(" ")}><span>{ratingPercentage}%</span></div>}
                 </div>
                 <div className="movie-tile-info">
                     <p className="movie-tile-title">{this.props.title}</p>

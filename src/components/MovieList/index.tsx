@@ -12,6 +12,7 @@ class MovileList extends React.Component<MovileListProps> {
     }
 
     render() {
+        console.log(this.props.movieList);
         return (
             <div className="movie-list">
                 {this.props.movieList && this.props.movieList.map(movie => {
