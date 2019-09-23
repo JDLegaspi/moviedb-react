@@ -1,0 +1,33 @@
+.home-movies-outer-wrapper {
+    padding-top: 44px;
+
+    .home-movies-inner-wrapper {
+        h1 {
+            font-family: Montserrat;
+            font-weight: bold;
+            font-size: 20px;
+            margin: 12px 0;
+
+            padding-left: 15px;
+            color: #E3F4FC;
+        }
+    }
+}
+
+.home-header-images {
+    background: radial-gradient(82.98% 213.08% at 53.46% -21.35%, rgba(5, 112, 172, 0.46) 0%, rgba(8, 27, 35, 0) 60%);
+    position: relative;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .random-rectangles {
+        position: absolute;
+        top: 0;
+
+        &#left-svg { left: 0; }
+        &#right-svg { right: 0; }
+
+    }
+}

@@ -1,0 +1,97 @@
+.movie-page-wrapper {
+    color: #E3F4FC;
+}
+
+.movie-page-header {
+    min-height: 245px;
+    background-size: cover;
+
+    @media screen and (min-width : 1224px) {
+        min-height: 400px;
+    }
+}
+
+.movie-page-title-wrapper {
+    font-family: Montserrat;
+    border-bottom: 1px solid #0F303D;
+    display: flex;
+    padding: 20px 20px 30px;
+    min-height: 210px;
+    box-sizing: border-box;
+}
+
+.movie-page-img-wrapper {
+    flex: 0.6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.movie-page-movie-tile-img {
+    width: 140px;
+    height: 213px;
+    background-size: cover;
+    border-radius: 10px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5), 0px 8px 16px rgba(0, 0, 0, 0.5), 0px 16px 32px rgba(0, 0, 0, 0.5);
+    padding: 4px;
+    position: absolute;
+    top: -80px;
+}
+
+.movie-page-title-info-wrapper {
+    flex: 1;
+    padding: 0 10px;
+
+    > p {
+        font-size: 12px;
+        line-height: 21px;
+        color: #B8D8E6;
+        font-weight: 200;
+        margin: 0px;
+    }
+
+    > h1 {
+        margin-top: 0;
+        font-weight: bold;
+    }
+}
+
+.movie-page-overview {
+    padding: 20px 20px;
+
+    > h2 {
+        margin: 0
+    }
+
+    > p {
+        font-family: Roboto;
+        font-size: 16px;
+        line-height: 24px;
+        color: #9FBBC7;
+    }
+}
+
+#movie-page-back {
+    width: 44px;
+    height: 44px;
+    position: absolute;
+    top: 20px;
+    left: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    > svg {
+        vertical-align: middle;
+
+        > path {
+            transition: 0.2s;
+        }
+    }
+
+    &:hover > svg > path {
+        fill:  rgba(255,255,255,0.5)
+    }
+}

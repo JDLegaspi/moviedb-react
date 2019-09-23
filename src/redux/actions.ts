@@ -5,7 +5,13 @@ const apiKey = "6ed12e064b90ae1290fa326ce9e790ff";
 const apiUrl = "https://api.themoviedb.org/3/";
 const popularMoviesEndpoint = apiUrl + "movie/popular";
 const searchMoviesEndpoint = apiUrl + "search/movie";
+const fetchMovieDetilsEndpoint = apiUrl + "movie";
 
+const ResetMovieState = () => {
+    return {
+        type: 'RESET_MOVIE_STATE',
+    }
+};
 
 // FETCH_POPULAR_MOVIES start
 
@@ -26,17 +32,6 @@ const FetchPopularMoviesSuccess = (response: Response) => {
         type: 'FETCH_POPULAR_MOVIES_SUCCESS',
         payload: {response: response}
     }
-};
-
-const FetchPopularMovies: ActionCreator<ThunkAction<Promise<{type: string}>, null, null, AnyAction>> = () => {
-    return dispatch => {
-        dispatch(FetchPopularMoviesStarted());
-
-        return fetch(`${popularMoviesEndpoint}?api_key=${apiKey}`)
-            .then(response => response.json())
-            .then(responseBody => dispatch(FetchPopularMoviesSuccess(responseBody)))
-            .catch(err => dispatch(FetchPopularMoviesFailed()));
-    };
 };
 
 // FETCH_POPULAR_MOVIES end
@@ -62,11 +57,45 @@ const SearchMoviesSuccess = (response: Response) => {
     }
 };
 
-const SearchMovies: ActionCreator<ThunkAction<Promise<{type: string}>, null, null, AnyAction>> = (searchQuery?: string) => {
+// SEARCH_MOVIES end
+
+
+const FetchMovieDetailsStarted = (searchInput?: string) => {
+    return {
+        type: 'FETCH_MOVIE_DETAILS_STARTED',
+    }
+};
+
+const FetchMovieDetailsFailed = () => {
+    return {
+        type: 'FETCH_MOVIE_DETAILS_FAILED',
+    }
+};
+
+const FetchMovieDetailsSuccess = (response: Response) => {
+    return {
+        type: 'FETCH_MOVIE_DETAILS_SUCCESS',
+        payload: {response: response}
+    }
+};
+
+// SEARCH_MOVIES end
+
+// ASYNC ACTIONS start
+const FetchPopularMovies: ActionCreator<ThunkAction<Promise<{type: string}>, null, null, AnyAction>> = () => {
     return dispatch => {
         dispatch(FetchPopularMoviesStarted());
 
-        console.log(searchQuery);
+        return fetch(`${popularMoviesEndpoint}?api_key=${apiKey}`)
+            .then(response => response.json())
+            .then(responseBody => dispatch(FetchPopularMoviesSuccess(responseBody)))
+            .catch(err => dispatch(FetchPopularMoviesFailed()));
+    };
+};
+
+const SearchMovies: ActionCreator<ThunkAction<Promise<{type: string}>, null, null, AnyAction>> = (searchQuery?: string) => {
+    return dispatch => {
+        dispatch(SearchMoviesStarted());
 
         return fetch(`${searchMoviesEndpoint}?api_key=${apiKey}&query=${searchQuery}`)
             .then(response => response.json())
@@ -75,9 +104,22 @@ const SearchMovies: ActionCreator<ThunkAction<Promise<{type: string}>, null, nul
     };
 };
 
-// SEARCH_MOVIES end
+const FetchMovieDetails: ActionCreator<ThunkAction<Promise<{type: string}>, null, null, AnyAction>> = (movieId: string) => {
+    return dispatch => {
+        dispatch(FetchMovieDetailsStarted());
+
+        return fetch(`${fetchMovieDetilsEndpoint}/${movieId}?api_key=${apiKey}`)
+            .then(response => response.json())
+            .then(responseBody => dispatch(FetchMovieDetailsSuccess(responseBody)))
+            .catch(err => dispatch(FetchMovieDetailsFailed()));
+    };
+};
+
+// ASYNC ACTIONS end
 
 export {
-    FetchPopularMovies, FetchPopularMoviesStarted, FetchPopularMoviesSuccess,
-    SearchMovies, SearchMoviesStarted, SearchMoviesSuccess,
+    ResetMovieState,
+    FetchPopularMovies, FetchPopularMoviesStarted, FetchPopularMoviesSuccess, FetchPopularMoviesFailed,
+    SearchMovies, SearchMoviesStarted, SearchMoviesSuccess, SearchMoviesFailed,
+    FetchMovieDetails, FetchMovieDetailsStarted, FetchMovieDetailsSuccess, FetchMovieDetailsFailed
 }

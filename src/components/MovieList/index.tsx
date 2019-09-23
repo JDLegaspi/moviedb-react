@@ -2,12 +2,13 @@ import React from 'react';
 import "./index.scss";
 import MovieTile, { MovieTileProps } from '../MovieTile';
 
-export interface MovileListProps {
+export interface MovieListProps {
     movieList?: MovieTileProps[];
+    onMovieClick?: (movieId: number) => void;
 }
 
-class MovileList extends React.Component<MovileListProps> {
-    constructor(props: MovileListProps) {
+class MovieList extends React.Component<MovieListProps> {
+    constructor(props: MovieListProps) {
         super(props);
     }
 
@@ -16,11 +17,15 @@ class MovileList extends React.Component<MovileListProps> {
         return (
             <div className="movie-list">
                 {this.props.movieList && this.props.movieList.map(movie => {
-                    return <MovieTile {...movie} />
+                    return (
+                        <div className="movie-list-movie-wrapper">
+                            <MovieTile {...movie} onMovieClick={this.props.onMovieClick} />
+                        </div>
+                    )
                 })}
             </div>
         );
     }
 }
 
-export default MovileList;
+export default MovieList;
