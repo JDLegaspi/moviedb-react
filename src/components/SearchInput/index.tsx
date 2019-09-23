@@ -8,6 +8,12 @@ export interface SearchInputProps {
 class SearchInput extends React.Component<SearchInputProps> {
     constructor(props: SearchInputProps) {
         super(props);
+
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
+
+    handleInputChange(e:  React.ChangeEvent<HTMLInputElement>) {
+        if (this.props.onSearch !== undefined) this.props.onSearch(e.currentTarget.value);
     }
 
     render() {
@@ -24,6 +30,7 @@ class SearchInput extends React.Component<SearchInputProps> {
                     <input
                         className="search-input"
                         placeholder="Search"
+                        onChange={this.handleInputChange}
                     />
                     {searchIcon}
                 </div>
