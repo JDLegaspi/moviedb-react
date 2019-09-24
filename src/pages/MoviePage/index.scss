@@ -5,10 +5,14 @@
 .movie-page-header {
     min-height: 245px;
     background-size: cover;
-    background-position: center;
+    background-position: top;
 
     @media screen and (min-width : 1224px) {
         min-height: 400px;
+    }
+
+    @media screen and (min-width : 1440px) {
+        min-height: 550px;
     }
 }
 
@@ -42,7 +46,8 @@
 
 .movie-page-title-info-wrapper {
     flex: 1;
-    padding: 0 10px;
+    padding: 0;
+    padding-left: 30px;
 
     > p {
         font-size: 12px;

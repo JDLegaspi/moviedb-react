@@ -9,17 +9,12 @@ export interface MovieListProps {
 }
 
 class MovieList extends React.Component<MovieListProps> {
-    constructor(props: MovieListProps) {
-        super(props);
-    }
-
     render() {
-        console.log(this.props.movieList);
         return (
             <div className="movie-list">
                 {this.props.movieList && this.props.movieList.length > 0 && this.props.movieList.map(movie => {
                     return (
-                        <div className="movie-list-movie-wrapper">
+                        <div className="movie-list-movie-wrapper" key={movie.id}>
                             <MovieTile {...movie} onMovieClick={this.props.onMovieClick} />
                         </div>
                     )

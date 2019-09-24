@@ -4,7 +4,7 @@ import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from "react-redux";
-import AppState, { initialAppState } from './redux/state';
+import { initialAppState } from './redux/state';
 import { applyMiddleware, createStore } from 'redux';
 import AppReducer from './redux/reducer';
 import thunk from 'redux-thunk';

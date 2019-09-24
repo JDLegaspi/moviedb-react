@@ -1,5 +1,4 @@
-import AppState, { initialAppState, Movie } from "./state";
-import { Action } from "redux";
+import { initialAppState, Movie } from "./state";
 
 interface MovieInfo {
     poster_path?: string;
@@ -38,10 +37,9 @@ const AppReducer = (state = initialAppState, action: any) => {
 
         case "FETCH_POPULAR_MOVIES_SUCCESS":
             let moviesFromResponse: MovieInfo[] = action.payload.response.results;
-            console.log("movies from reducer", moviesFromResponse);
-
             let movies: Movie[] = [];
 
+            //map response object to movies array
             for (let movieResponse of moviesFromResponse) {
                 movies.push({
                     id: movieResponse.id !== undefined ? movieResponse.id : 0,
@@ -64,8 +62,8 @@ const AppReducer = (state = initialAppState, action: any) => {
 
         case "FETCH_MOVIE_DETAILS_SUCCESS":
             let movieDetailsResponse: MovieDetails = action.payload.response;
-            console.log("movieDetailsFromReducer", movieDetailsResponse);
 
+            //map response object to movie object
             let movie: Movie = {
                 id: movieDetailsResponse.id !== undefined ? movieDetailsResponse.id : 0,
                 title: movieDetailsResponse.title !== undefined ? movieDetailsResponse.title : "",
@@ -87,10 +85,9 @@ const AppReducer = (state = initialAppState, action: any) => {
 
         case "SEARCH_MOVIES_SUCCESS":
                 let moviesFromSearchResponse: MovieInfo[] = action.payload.response.results;
-                console.log("movies from reducer", moviesFromSearchResponse);
-
                 let moviesSearch: Movie[] = [];
 
+                //map response object to movies array
                 for (let movieResponse of moviesFromSearchResponse) {
                     moviesSearch.push({
                         id: movieResponse.id !== undefined ? movieResponse.id : 0,

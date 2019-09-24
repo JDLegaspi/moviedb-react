@@ -1,6 +1,7 @@
 import React from 'react';
 import "./index.scss";
-import { monthNames } from '../../constants';
+import { monthNames, missingImage } from '../../constants';
+import { placeholder } from '@babel/types';
 
 export interface MovieTileProps {
     id: number;
@@ -18,19 +19,22 @@ class MovieTile extends React.Component<MovieTileProps> {
         this.handleMovieClick = this.handleMovieClick.bind(this);
     }
 
+    //outputs high medium or low depending on rating quality
+    //low: 0-33, med: 33-66, high: 66-100
     getRatingQuality(rating: number) {
         let quality = ["low", "medium", "high"];
         return quality[Math.trunc(rating / 33)];
     }
 
+    //callback when movie image has been clicked
+    //home page uses this to route to movie page
     handleMovieClick() {
         if (this.props.onMovieClick !== undefined) this.props.onMovieClick(this.props.id);
     }
 
+    //converts "21-3-2019" to "March 2019"
     convertDateString(dateString: string): string {
         let date = new Date(dateString);
-
-        console.log(date.getMonth())
 
         return `${monthNames[date.getMonth()]} ${date.getFullYear()}`;
     }
@@ -40,7 +44,7 @@ class MovieTile extends React.Component<MovieTileProps> {
         let ratingClasses: string[] = ["movie-tile-rating", ratingPercentage ? "rating-" + this.getRatingQuality(ratingPercentage) : ""]
 
         //use original image or placeholder if not found
-        let movieImg = this.props.imageUrl !== "https://image.tmdb.org/t/p/originalnull" ? this.props.imageUrl : "https://previews.123rf.com/images/dstarky/dstarky1701/dstarky170101360/69424345-movie-icon-or-logo-in-modern-line-style-high-quality-black-outline-pictogram-for-web-site-design-and.jpg"
+        let movieImg = this.props.imageUrl !== missingImage ? this.props.imageUrl : placeholder
 
         return (
             <div className="movie-tile-wrapper">

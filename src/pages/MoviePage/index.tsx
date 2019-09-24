@@ -1,7 +1,7 @@
 import React from 'react';
 import "./index.scss";
 import { connect } from 'react-redux';
-import AppState, { HomeState, Movie } from '../../redux/state';
+import AppState, { Movie } from '../../redux/state';
 import { FetchMovieDetails } from '../../redux/actions';
 import { ThunkDispatch } from 'redux-thunk';
 import { RouteComponentProps } from 'react-router';
@@ -34,6 +34,7 @@ class MoviePage extends React.Component<MoviePageProps> {
         if (this.props.fetchMovieDetails !== undefined) this.props.fetchMovieDetails(this.props.match.params.movieId);
     }
 
+    //converts minutes to hours, eg: 123 => "2h 3 min", as shown in mocks
     convertMinutesToHours(totalMinutes: number): string {
         var hours = Math.floor(totalMinutes / 60);
         var minutes = totalMinutes % 60;

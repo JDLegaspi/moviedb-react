@@ -1,11 +1,6 @@
-import dispatch, { ThunkAction } from "redux-thunk";
-import { Dispatch, ActionCreator, AnyAction, Action } from "redux";
-
-const apiKey = "6ed12e064b90ae1290fa326ce9e790ff";
-const apiUrl = "https://api.themoviedb.org/3/";
-const popularMoviesEndpoint = apiUrl + "movie/popular";
-const searchMoviesEndpoint = apiUrl + "search/movie";
-const fetchMovieDetilsEndpoint = apiUrl + "movie";
+import { ThunkAction } from "redux-thunk";
+import { ActionCreator, AnyAction } from "redux";
+import { popularMoviesEndpoint, apiKey, searchMoviesEndpoint, fetchMovieDetilsEndpoint } from "../constants";
 
 const ResetMovieState = () => {
     return {
@@ -15,7 +10,7 @@ const ResetMovieState = () => {
 
 // FETCH_POPULAR_MOVIES start
 
-const FetchPopularMoviesStarted = (searchInput?: string) => {
+const FetchPopularMoviesStarted = () => {
     return {
         type: 'FETCH_POPULAR_MOVIES_STARTED',
     }
@@ -38,7 +33,7 @@ const FetchPopularMoviesSuccess = (response: Response) => {
 
 // SEARCH_MOVIES start
 
-const SearchMoviesStarted = (searchInput?: string) => {
+const SearchMoviesStarted = () => {
     return {
         type: 'SEARCH_MOVIES_STARTED',
     }
@@ -60,7 +55,7 @@ const SearchMoviesSuccess = (response: Response) => {
 // SEARCH_MOVIES end
 
 
-const FetchMovieDetailsStarted = (searchInput?: string) => {
+const FetchMovieDetailsStarted = () => {
     return {
         type: 'FETCH_MOVIE_DETAILS_STARTED',
     }
@@ -82,6 +77,8 @@ const FetchMovieDetailsSuccess = (response: Response) => {
 // SEARCH_MOVIES end
 
 // ASYNC ACTIONS start
+
+//fetches most popular movies currently
 const FetchPopularMovies: ActionCreator<ThunkAction<Promise<{type: string}>, null, null, AnyAction>> = () => {
     return dispatch => {
         dispatch(FetchPopularMoviesStarted());
@@ -93,6 +90,7 @@ const FetchPopularMovies: ActionCreator<ThunkAction<Promise<{type: string}>, nul
     };
 };
 
+//searches for movies based on search query
 const SearchMovies: ActionCreator<ThunkAction<Promise<{type: string}>, null, null, AnyAction>> = (searchQuery?: string) => {
     return dispatch => {
         dispatch(SearchMoviesStarted());
@@ -104,6 +102,7 @@ const SearchMovies: ActionCreator<ThunkAction<Promise<{type: string}>, null, nul
     };
 };
 
+//fetches details of a movie by id
 const FetchMovieDetails: ActionCreator<ThunkAction<Promise<{type: string}>, null, null, AnyAction>> = (movieId: string) => {
     return dispatch => {
         dispatch(FetchMovieDetailsStarted());
